@@ -1,0 +1,489 @@
+/* ===== CALENDAR SECTION ===== */
+.calendar-section {
+    background-color: var(--color-white);
+    padding: 5rem 2rem;
+}
+
+.calendar-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.calendar-title-wrapper {
+    flex: 1;
+}
+
+.calendar-title {
+    font-family: var(--font-primary);
+    font-size: 3rem;
+    font-weight: 500;
+    color: var(--color-advance);
+    margin: 0 0 0.5rem 0;
+    line-height: 1.1;
+}
+
+.calendar-subtitle {
+    font-family: var(--font-secondary);
+    font-size: 1.1rem;
+    color: var(--color-anchor);
+    margin: 0;
+}
+
+.calendar-legend {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-secondary);
+    font-size: 0.9rem;
+    color: var(--color-anchor);
+}
+
+.legend-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+    background-color: var(--color-advance);
+}
+
+.legend-dot--peru {
+    background-color: var(--color-advance);
+}
+
+.legend-dot--default {
+    background-color: var(--color-depth);
+}
+
+/* Calendar Wrapper */
+.calendar-wrapper {
+    background-color: var(--color-white);
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(4, 39, 52, 0.08);
+    padding: 1.5rem;
+    overflow: hidden;
+}
+
+/* ===== FULLCALENDAR OVERRIDES ===== */
+
+/* General */
+#coursesCalendar {
+    --fc-border-color: var(--color-clarity);
+    --fc-today-bg-color: rgba(84, 151, 175, 0.08);
+    --fc-page-bg-color: transparent;
+    --fc-neutral-bg-color: var(--color-clarity);
+    --fc-list-event-hover-bg-color: var(--color-clarity);
+}
+
+/* Header Toolbar */
+#coursesCalendar .fc-toolbar {
+    margin-bottom: 1.5rem;
+}
+
+#coursesCalendar .fc-toolbar-title {
+    font-family: var(--font-primary);
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--color-depth);
+}
+
+/* Navigation Buttons */
+#coursesCalendar .fc-button {
+    background-color: transparent;
+    border: 2px solid var(--color-advance);
+    color: var(--color-advance);
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    font-family: var(--font-secondary);
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: none;
+}
+
+#coursesCalendar .fc-button:hover {
+    background-color: var(--color-advance);
+    color: var(--color-white);
+}
+
+#coursesCalendar .fc-button:focus {
+    box-shadow: 0 0 0 3px rgba(84, 151, 175, 0.3);
+}
+
+#coursesCalendar .fc-button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+#coursesCalendar .fc-button-primary:not(:disabled).fc-button-active,
+#coursesCalendar .fc-button-primary:not(:disabled):active {
+    background-color: var(--color-advance);
+    border-color: var(--color-advance);
+    color: var(--color-white);
+}
+
+/* Prev/Next Icons */
+#coursesCalendar .fc-prev-button,
+#coursesCalendar .fc-next-button {
+    padding: 0.5rem 0.75rem;
+}
+
+#coursesCalendar .fc-icon {
+    font-size: 1.1rem;
+}
+
+/* Day Headers */
+#coursesCalendar .fc-col-header-cell {
+    padding: 1rem 0;
+    background-color: var(--color-clarity);
+}
+
+#coursesCalendar .fc-col-header-cell-cushion {
+    font-family: var(--font-secondary);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-anchor);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+}
+
+/* Day Cells */
+#coursesCalendar .fc-daygrid-day:hover {
+    background-color: rgba(228, 242, 247, 0.5);
+}
+
+#coursesCalendar .fc-daygrid-day-number {
+    font-family: var(--font-secondary);
+    font-size: 0.95rem;
+    color: var(--color-depth);
+    padding: 0.5rem 0.75rem;
+    text-decoration: none;
+}
+
+#coursesCalendar .fc-day-today .fc-daygrid-day-number {
+    background-color: var(--color-advance);
+    color: var(--color-white);
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0.25rem;
+}
+
+#coursesCalendar .fc-day-other .fc-daygrid-day-number {
+    color: var(--color-reflect);
+}
+
+/* Events */
+#coursesCalendar .fc-event {
+    border: none;
+    border-radius: 8px;
+    padding: 0 12px;
+    margin: 0 4px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    height: 50px;
+    display: flex;
+    align-items: center;
+}
+
+#coursesCalendar .fc-event:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(4, 39, 52, 0.15);
+}
+
+#coursesCalendar .fc-event.calendar-event--course {
+    background-color: var(--color-advance);
+    color: var(--color-white);
+}
+
+/* Colores por ubicación */
+#coursesCalendar .fc-event.calendar-event--peru {
+    background-color: var(--color-advance);
+    color: var(--color-white);
+}
+
+#coursesCalendar .fc-event.calendar-event--default {
+    background-color: var(--color-depth);
+    color: var(--color-white);
+}
+
+#coursesCalendar .fc-event-title {
+    font-family: var(--font-secondary);
+    font-size: 0.9rem;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#coursesCalendar .fc-event-time {
+    display: none;
+}
+
+/* Day cells - altura fija */
+#coursesCalendar .fc-daygrid-day {
+    height: 120px;
+    transition: background-color 0.2s ease;
+}
+
+#coursesCalendar .fc-daygrid-day-frame {
+    height: 100%;
+}
+
+/* Centrar eventos verticalmente */
+#coursesCalendar .fc-daygrid-day-events {
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+}
+
+#coursesCalendar .fc-daygrid-event-harness {
+    margin-top: 0 !important;
+}
+
+#coursesCalendar .fc-daygrid-day-bottom {
+    display: none;
+}
+
+/* Multi-day events */
+#coursesCalendar .fc-daygrid-event-harness {
+    margin-top: 2px;
+}
+
+#coursesCalendar .fc-daygrid-block-event {
+    border-radius: 6px;
+}
+
+/* More link */
+#coursesCalendar .fc-daygrid-more-link {
+    font-family: var(--font-secondary);
+    font-size: 0.75rem;
+    color: var(--color-anchor);
+    font-weight: 600;
+    padding: 2px 6px;
+    margin: 2px 4px;
+}
+
+#coursesCalendar .fc-daygrid-more-link:hover {
+    background-color: var(--color-clarity);
+    border-radius: 4px;
+}
+
+/* Popover */
+#coursesCalendar .fc-popover {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(4, 39, 52, 0.15);
+    overflow: hidden;
+}
+
+#coursesCalendar .fc-popover-header {
+    background-color: var(--color-depth);
+    color: var(--color-white);
+    font-family: var(--font-secondary);
+    padding: 0.75rem 1rem;
+}
+
+#coursesCalendar .fc-popover-body {
+    padding: 0.5rem;
+}
+
+/* ===== TOOLTIP ===== */
+.calendar-tooltip {
+    position: absolute;
+    z-index: 100;
+    background-color: var(--color-depth);
+    color: var(--color-white);
+    border-radius: 10px;
+    padding: 1rem;
+    min-width: 200px;
+    max-width: 280px;
+    box-shadow: 0 8px 24px rgba(4, 39, 52, 0.2);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-50%) translateY(-100%);
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+    pointer-events: none;
+}
+
+.calendar-tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 8px solid transparent;
+    border-top-color: var(--color-depth);
+}
+
+.calendar-tooltip.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.tooltip-title {
+    font-family: var(--font-primary);
+    font-size: 1rem;
+    font-weight: 500;
+    margin: 0 0 0.5rem 0;
+    color: var(--color-white);
+}
+
+.tooltip-location,
+.tooltip-spots {
+    font-family: var(--font-secondary);
+    font-size: 0.85rem;
+    margin: 0.25rem 0;
+    color: var(--color-reflect);
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width: 1024px) {
+    .calendar-section {
+        padding: 4rem 2rem;
+    }
+    
+    .calendar-title {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .calendar-section {
+        padding: 3rem 1.5rem;
+    }
+    
+    .calendar-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .calendar-title {
+        font-size: 2rem;
+    }
+    
+    .calendar-subtitle {
+        font-size: 1rem;
+    }
+    
+    .calendar-wrapper {
+        padding: 1rem;
+        border-radius: 12px;
+    }
+    
+    #coursesCalendar .fc-toolbar {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    
+    #coursesCalendar .fc-toolbar-chunk {
+        display: flex;
+        align-items: center;
+    }
+    
+    #coursesCalendar .fc-toolbar-title {
+        font-size: 1.1rem;
+    }
+    
+    #coursesCalendar .fc-col-header-cell-cushion {
+        font-size: 0.75rem;
+    }
+    
+    #coursesCalendar .fc-daygrid-day {
+        height: 80px;
+    }
+    
+    #coursesCalendar .fc-daygrid-day-number {
+        font-size: 0.85rem;
+        padding: 0.35rem 0.5rem;
+    }
+    
+    #coursesCalendar .fc-event {
+        height: 35px;
+    }
+    
+    #coursesCalendar .fc-event-title {
+        font-size: 0.7rem;
+    }
+    
+    .calendar-tooltip {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .calendar-section {
+        padding: 2.5rem 1rem;
+    }
+    
+    .calendar-title {
+        font-size: 1.75rem;
+    }
+    
+    .calendar-legend {
+        display: none;
+    }
+    
+    .calendar-wrapper {
+        padding: 0.75rem;
+    }
+    
+    #coursesCalendar .fc-toolbar {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    #coursesCalendar .fc-toolbar-title {
+        font-size: 1rem;
+    }
+    
+    #coursesCalendar .fc-button {
+        padding: 0.4rem 0.6rem;
+        font-size: 0.8rem;
+    }
+    
+    #coursesCalendar .fc-daygrid-day {
+        height: 70px;
+    }
+    
+    #coursesCalendar .fc-event {
+        height: 28px;
+        padding: 0 6px;
+    }
+    
+    #coursesCalendar .fc-event-title {
+        font-size: 0.6rem;
+    }
+    
+    #coursesCalendar .fc-col-header-cell-cushion {
+        font-size: 0.65rem;
+    }
+}

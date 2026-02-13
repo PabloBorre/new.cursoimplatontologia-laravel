@@ -1,0 +1,83 @@
+@extends('layouts.public')
+
+@section('title', $doctor->full_name . ' - Implantex Academy')
+
+@section('content')
+<!-- HERO PÁGINA INTERIOR -->
+<section class="page-hero">
+    <div class="page-hero__background">
+        <img src="{{ asset('images/fondo-docentes-interior.webp') }}" alt="{{ $doctor->full_name }}" class="page-hero__image">
+        <div class="page-hero__overlay"></div>
+        <img src="{{ asset('images/flecha-blanca.svg') }}" alt="" class="hero-arrow">
+    </div>
+    <div class="page-hero__content">
+        <h1 class="page-hero__title">{{ $doctor->full_name }}</h1>
+    </div>
+</section>
+
+<!-- CONTENIDO DEL DOCENTE -->
+<section class="doctor-detail">
+    <div class="doctor-detail__bg-stripe"></div>
+
+    <div class="doctor-detail__container">
+        <!-- Columna izquierda: Información del doctor -->
+        <div class="doctor-detail__info">
+
+            @php
+                $sections = [
+                    'studies' => 'Studies',
+                    'other_studies' => 'Other Studies',
+                    'titles' => 'Titles',
+                    'teaching_activity' => 'Teaching Activity',
+                    'teaching_category' => 'Teaching Category',
+                    'clinical_research' => 'Clinical Research',
+                    'patents' => 'Patents',
+                    'publications' => 'Publications',
+                    'presentations' => 'Presentations',
+                    'courses_taught' => 'Programs Taught',
+                    'courses_received' => 'Programs Received',
+                    'professional_experience' => 'Professional Experience',
+                    'positions_held' => 'Positions Held',
+                    'abroad_stays' => 'Abroad Stays',
+                    'scholarships_research_groups' => 'Scholarships & Research Groups',
+                    'notes' => 'Additional Notes',
+                ];
+            @endphp
+
+            @foreach($sections as $field => $title)
+                @if(!empty($doctor->$field))
+                    <div class="doctor-detail__block">
+                        <img src="{{ asset('images/flecha-azulclaro-rellena.svg') }}" alt="" class="doctor-detail__block-arrow">
+                        <div class="doctor-detail__block-content">
+                            <h3>{{ $title }}</h3>
+                            <div>{!! $doctor->$field !!}</div>
+                        </div>
+                    </div>
+                @endif
+            @endforeach
+
+        </div>
+
+        <!-- Columna derecha: Imagen del doctor -->
+        <div class="doctor-detail__sidebar">
+            <div class="doctor-detail__image-box">
+                <img src="{{ asset($doctor->image_path) }}" alt="{{ $doctor->full_name }}" class="doctor-detail__image">
+            </div>
+            @if($doctor->role_title)
+                <div class="doctor-detail__role-box">
+                    <span class="doctor-detail__role">{{ $doctor->role_title }}</span>
+                </div>
+            @endif
+        </div>
+    </div>
+</section>
+
+<!-- BOTÓN VOLVER -->
+<section class="doctor-back">
+    <div class="doctor-back__container">
+        <div class="doctor-back__content">
+            <a href="{{ url('docentes') }}" class="doctor-back__btn">← Back to teachers</a>
+        </div>
+    </div>
+</section>
+@endsection
