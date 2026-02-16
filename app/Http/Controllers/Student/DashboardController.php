@@ -11,10 +11,9 @@ class DashboardController extends Controller
     {
         $user = $request->user();
 
-        // Cargar los cursos del estudiante con su estado de inscripción
         $enrollments = $user->enrollments()
-            ->withPivot(['status', 'amount_paid', 'enrolled_at'])
-            ->orderByPivot('enrolled_at', 'desc')
+            ->with('course')
+            ->orderBy('created_at', 'desc')
             ->get();
 
         return view('student.dashboard', [

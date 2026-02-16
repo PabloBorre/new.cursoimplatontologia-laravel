@@ -2,6 +2,7 @@
 
 namespace App\Actions\Fortify;
 
+use App\Concerns\PasswordValidationRules;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -10,6 +11,8 @@ use Laravel\Fortify\Contracts\CreatesNewUsers;
 
 class CreateNewUser implements CreatesNewUsers
 {
+    use PasswordValidationRules;
+
     /**
      * Validate and create a newly registered user.
      *
@@ -24,7 +27,7 @@ class CreateNewUser implements CreatesNewUsers
             'email'               => ['required', 'string', 'email', 'max:255', Rule::unique(User::class)],
             'phone'               => ['required', 'string', 'max:30'],
             'previous_experience' => ['required', 'string', 'max:5000'],
-            'password'            => ['required', 'string', 'confirmed', Rules\Password::defaults()],
+            'password'            => ['required', 'string', 'confirmed', 'regex:/^\S+$/', \Illuminate\Validation\Rules\Password::min(8)->letters()->numbers()],
 
             // File uploads
             'documentation'       => ['required', 'file', 'mimes:pdf,jpg,jpeg,png', 'max:10240'],
