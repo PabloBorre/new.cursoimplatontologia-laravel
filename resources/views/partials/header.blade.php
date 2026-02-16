@@ -19,13 +19,38 @@
                 <img src="{{ asset('icon/bandera-eeuu.svg') }}" alt="US" class="phone-flag">
                 <span>786 328 78 05</span>
             </a>
+            <!-- Auth dentro del nav (visible solo en mobile/tablet) -->
+            @auth
+                <a href="{{ route('dashboard') }}" class="header-phone header-phone--nav">
+                    <img src="{{ asset('icon/usuario.svg') }}" alt="" class="phone-flag">
+                    <span>{{ auth()->user()->name }}</span>
+                </a>
+            @else
+                <a href="{{ route('login') }}" class="header-phone header-phone--nav">
+                    <span>Register</span>
+                </a>
+            @endauth
         </nav>
 
-        <!-- Botón teléfono desktop -->
-        <a href="tel:+17863287805" class="header-phone header-phone--desktop">
-            <img src="{{ asset('icon/bandera-eeuu.svg') }}" alt="US" class="phone-flag">
-            <span>786 328 78 05</span>
-        </a>
+        <!-- Botones desktop -->
+        <div class="header-actions">
+            <a href="tel:+17863287805" class="header-phone header-phone--desktop">
+                <img src="{{ asset('icon/bandera-eeuu.svg') }}" alt="US" class="phone-flag">
+                <span>786 328 78 05</span>
+            </a>
+
+            @auth
+                <a href="{{ route('dashboard') }}" class="header-phone header-phone--desktop">
+                <img src="{{ asset('icon/usuario.svg') }}" alt="" class="phone-flag">
+                <span>{{ auth()->user()->name }}</span>
+                </a>
+            @else
+                <a href="{{ route('login') }}" class="header-phone header-phone--desktop">
+                    <img src="{{ asset('icon/usuario.svg') }}" alt="" class="phone-flag">
+                    <span>Register</span>
+                </a>
+            @endauth
+        </div>
 
         <!-- Hamburger -->
         <button class="header-hamburger" id="menuToggle" aria-label="Abrir menú">

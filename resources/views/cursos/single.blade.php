@@ -59,13 +59,30 @@
         </div>
 
         <!-- Columna derecha: Imagen + Precio -->
+
         <div class="course-detail__sidebar">
             <div class="course-detail__image-box">
                 <img src="{{ asset($course->content_image ?? 'images/operacion-imagen-docentes.webp') }}" alt="{{ $course->title }}" class="course-detail__image">
             </div>
-            <div class="course-detail__price-box">
-                <span class="course-detail__price">{{ \App\Models\Course::formatPrice($course->price, $course->currency) }}</span>
-            </div>
+
+            @auth
+                @if(auth()->user()->isStudent() && auth()->user()->isEnrolledIn($course->id))
+                    <div class="course-detail__price-box course-detail__price-box--enrolled">
+                        <span class="course-detail__price">Already Enrolled</span>
+                    </div>
+                @else
+                    <form action="{{ route('student.checkout', $course) }}" method="POST">
+                        @csrf
+                        <button type="submit" class="course-detail__price-box course-detail__price-box--btn">
+                            <span class="course-detail__price">{{ \App\Models\Course::formatPrice($course->price, $course->currency) }} Reserve</span>
+                        </button>
+                    </form>
+                @endif
+            @else
+                <a href="{{ route('login') }}" class="course-detail__price-box course-detail__price-box--btn">
+                    <span class="course-detail__price">Check Price</span>
+                </a>
+            @endauth
         </div>
     </div>
 </section>
