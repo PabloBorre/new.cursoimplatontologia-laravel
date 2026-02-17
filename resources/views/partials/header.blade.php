@@ -27,7 +27,7 @@
                 </a>
             @else
                 <a href="{{ route('login') }}" class="header-phone header-phone--nav">
-                    <span>Register</span>
+                    <span>Log in</span>
                 </a>
             @endauth
         </nav>
@@ -47,7 +47,7 @@
             @else
                 <a href="{{ route('login') }}" class="header-phone header-phone--desktop">
                     <img src="{{ asset('icon/usuario.svg') }}" alt="" class="phone-flag">
-                    <span>Register</span>
+                    <span>Log in</span>
                 </a>
             @endauth
         </div>

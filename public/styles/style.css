@@ -6193,3 +6193,13 @@ a.contact-bar__item:hover {
     align-items: center;
     gap: 0.75rem;
 }
+
+/* ===== ADMIN TABLE ===== */
+.admin-table tbody tr:hover {
+    background-color: #e4e4e7 !important;
+}
+
+.admin-table tbody tr:hover td,
+.admin-table tbody tr:hover td * {
+    color: #18181b !important;
+}
