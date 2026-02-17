@@ -85,7 +85,7 @@ class User extends Authenticatable
     {
         return $this->enrollments()
             ->where('course_id', $courseId)
-            ->whereIn('status', ['paid', 'pending'])
+            ->where('status', 'paid')
             ->exists();
     }
 }

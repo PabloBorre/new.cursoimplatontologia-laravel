@@ -23,20 +23,27 @@ class CheckoutController extends Controller
     {
         $user = $request->user();
 
-        // Check if already enrolled
+        // Check if already paid
         if ($user->isEnrolledIn($course->id)) {
             return redirect()->route('student.dashboard')
                 ->with('error', 'You are already enrolled in this course.');
         }
 
-        // Create pending enrollment
-        $enrollment = Enrollment::create([
-            'user_id'    => $user->id,
-            'course_id'  => $course->id,
-            'status'     => 'pending',
-            'amount_paid' => $course->price,
-            'currency'   => strtolower($course->currency),
-        ]);
+        // Reuse existing pending enrollment or create new one
+        $enrollment = Enrollment::where('user_id', $user->id)
+            ->where('course_id', $course->id)
+            ->where('status', 'pending')
+            ->first();
+
+        if (!$enrollment) {
+            $enrollment = Enrollment::create([
+                'user_id'    => $user->id,
+                'course_id'  => $course->id,
+                'status'     => 'pending',
+                'amount_paid' => $course->price,
+                'currency'   => strtolower($course->currency),
+            ]);
+        }
 
         // Create Stripe Checkout Session
         $session = StripeSession::create([

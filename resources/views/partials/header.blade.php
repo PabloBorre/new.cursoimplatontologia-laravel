@@ -40,12 +40,12 @@
             </a>
 
             @auth
-                <a href="{{ route('dashboard') }}" class="header-phone header-phone--desktop">
+                <a href="{{ route('dashboard') }}" class="header-phone header-phone--desktop" style="gap: 0 !important">
                 <img src="{{ asset('icon/usuario.svg') }}" alt="" class="phone-flag">
                 <span>{{ auth()->user()->name }}</span>
                 </a>
             @else
-                <a href="{{ route('login') }}" class="header-phone header-phone--desktop">
+                <a href="{{ route('login') }}" class="header-phone header-phone--desktop" style="gap: 0 !important">
                     <img src="{{ asset('icon/usuario.svg') }}" alt="" class="phone-flag">
                     <span>Log in</span>
                 </a>
