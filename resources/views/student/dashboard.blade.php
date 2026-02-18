@@ -20,7 +20,14 @@
 
         {{-- Profile Summary --}}
         <div class="rounded-lg border border-zinc-200 bg-white p-6 dark:border-zinc-700 dark:bg-zinc-800">
-            <h2 class="text-lg font-medium text-zinc-900 dark:text-zinc-100">{{ __('Your Profile') }}</h2>
+            <div class="flex items-center justify-between">
+                <h2 class="text-lg font-medium text-zinc-900 dark:text-zinc-100">{{ __('Your Profile') }}</h2>
+                <a href="{{ route('student.profile.edit') }}"
+                   class="inline-flex items-center gap-1.5 rounded-lg border border-zinc-300 px-3 py-1.5 text-sm font-medium text-zinc-700 transition hover:bg-zinc-50 dark:border-zinc-600 dark:text-zinc-300 dark:hover:bg-zinc-700">
+                    <flux:icon.pencil-square variant="mini" class="size-4" />
+                    {{ __('Edit Profile') }}
+                </a>
+            </div>
             <div class="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <div>
                     <p class="text-sm text-zinc-500 dark:text-zinc-400">{{ __('Email') }}</p>

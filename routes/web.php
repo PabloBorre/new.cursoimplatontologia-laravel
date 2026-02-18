@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\StudentController as AdminStudentController;
 use App\Http\Controllers\Admin\EnrollmentController as AdminEnrollmentController;
 use App\Http\Controllers\Student\DashboardController as StudentDashboardController;
 use App\Http\Controllers\Student\CheckoutController;
+use App\Http\Controllers\Student\ProfileController;
 
 // ── Rutas públicas ──────────────────────────────────────────
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -51,6 +52,12 @@ Route::middleware(['auth', 'verified'])
     ->group(function () {
         Route::get('/dashboard', [StudentDashboardController::class, 'index'])
             ->name('dashboard');
+
+        // Profile
+        Route::get('/profile', [ProfileController::class, 'edit'])
+            ->name('profile.edit');
+        Route::put('/profile', [ProfileController::class, 'update'])
+            ->name('profile.update');
 
         // Checkout con Stripe
         Route::post('/courses/{course}/checkout', [CheckoutController::class, 'checkout'])
