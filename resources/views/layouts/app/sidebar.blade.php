@@ -11,9 +11,18 @@
             </flux:sidebar.header>
 
             <flux:sidebar.group :heading="__('Platform')" class="grid">
-                <flux:sidebar.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
+                <flux:sidebar.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard') || request()->routeIs('admin.dashboard')" wire:navigate>
                     {{ __('Dashboard') }}
                 </flux:sidebar.item>
+
+                @auth
+                    @if(auth()->user()->isAdmin())
+                        <flux:sidebar.item icon="academic-cap" :href="route('admin.enrollments.index')" :current="request()->routeIs('admin.enrollments.*')">
+                            {{ __('Enrollments') }}
+                        </flux:sidebar.item>
+                    @endif
+                @endauth
+
                 <flux:sidebar.item icon="globe-alt" :href="route('home')">
                     {{ __('Back to Website') }}
                 </flux:sidebar.item>

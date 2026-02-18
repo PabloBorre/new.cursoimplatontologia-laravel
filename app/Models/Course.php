@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Course extends Model
 {
@@ -39,7 +40,19 @@ class Course extends Model
         'sort_order'    => 'integer',
     ];
 
-    // Scopes
+    // ── Relationships ───────────────────────────────────────
+
+    public function enrollments(): HasMany
+    {
+        return $this->hasMany(Enrollment::class);
+    }
+
+    public function dates(): HasMany
+    {
+        return $this->hasMany(CourseDate::class);
+    }
+
+    // ── Scopes ──────────────────────────────────────────────
 
     public function scopeActive($query)
     {
@@ -56,7 +69,7 @@ class Course extends Model
         return $query->active()->where('slug', $slug);
     }
 
-    // Helpers
+    // ── Helpers ──────────────────────────────────────────────
 
     public static function getLevelName(int $level): string
     {

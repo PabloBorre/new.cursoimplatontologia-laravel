@@ -6,6 +6,8 @@ use App\Http\Controllers\StripeWebhookController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Admin\StudentController as AdminStudentController;
+use App\Http\Controllers\Admin\EnrollmentController as AdminEnrollmentController;
 use App\Http\Controllers\Student\DashboardController as StudentDashboardController;
 use App\Http\Controllers\Student\CheckoutController;
 
@@ -67,6 +69,20 @@ Route::middleware(['auth', 'verified', 'admin'])
     ->group(function () {
         Route::get('/dashboard', [AdminDashboardController::class, 'index'])
             ->name('dashboard');
+
+        // Students management
+        Route::get('/students/{student}', [AdminStudentController::class, 'show'])
+            ->name('students.show');
+        Route::get('/students/{student}/edit', [AdminStudentController::class, 'edit'])
+            ->name('students.edit');
+        Route::put('/students/{student}', [AdminStudentController::class, 'update'])
+            ->name('students.update');
+
+        // Enrollments management
+        Route::get('/enrollments', [AdminEnrollmentController::class, 'index'])
+            ->name('enrollments.index');
+        Route::get('/enrollments/{course}', [AdminEnrollmentController::class, 'show'])
+            ->name('enrollments.show');
     });
 
 
