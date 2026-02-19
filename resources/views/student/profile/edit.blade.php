@@ -281,6 +281,22 @@
         background-color: var(--color-anchor);
     }
 
+    /* Password hint */
+    .profile-edit__password-hint {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        margin-top: 1rem;
+        font-family: var(--font-secondary);
+        font-size: 0.75rem;
+        color: #888;
+    }
+
+    .profile-edit__password-hint svg {
+        flex-shrink: 0;
+        color: var(--color-advance);
+    }
+
     /* ===== RESPONSIVE ===== */
     @media (max-width: 768px) {
         .profile-edit {
@@ -340,7 +356,7 @@
             </div>
         </div>
 
-        {{-- Flash --}}
+        {{-- Flash para perfil --}}
         @if(session('success'))
             <div class="profile-edit__flash profile-edit__flash--success">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
@@ -348,13 +364,16 @@
             </div>
         @endif
 
-        @if($errors->any())
+        @if($errors->has('name') || $errors->has('last_name') || $errors->has('email') || $errors->has('phone') || $errors->has('dental_clinic_name') || $errors->has('position') || $errors->has('previous_experience') || $errors->has('documentation') || $errors->has('diploma') || $errors->has('dental_license'))
             <div class="profile-edit__flash profile-edit__flash--error">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126Z"/></svg>
                 {{ __('Please correct the errors below.') }}
             </div>
         @endif
 
+        {{-- ═══════════════════════════════════════════════════════ --}}
+        {{-- FORMULARIO 1: Perfil + Documentos                      --}}
+        {{-- ═══════════════════════════════════════════════════════ --}}
         <form action="{{ route('student.profile.update') }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
@@ -439,10 +458,63 @@
                 </div>
             </div>
 
-            {{-- Buttons --}}
+            {{-- Buttons perfil --}}
             <div class="profile-edit__buttons">
                 <a href="{{ route('student.dashboard') }}" class="profile-edit__cancel">{{ __('Cancel') }}</a>
                 <button type="submit" class="profile-edit__submit">{{ __('Save Changes') }}</button>
+            </div>
+        </form>
+
+        {{-- ═══════════════════════════════════════════════════════ --}}
+        {{-- FORMULARIO 2: Cambiar contraseña                       --}}
+        {{-- ═══════════════════════════════════════════════════════ --}}
+        <form action="{{ route('student.profile.password') }}" method="POST">
+            @csrf
+            @method('PUT')
+
+            <div class="profile-edit__card" style="margin-top: 1rem;">
+                <h3 class="profile-edit__card-title">{{ __('Change Password') }}</h3>
+                <p class="profile-edit__card-desc">{{ __('Update your password to keep your account secure.') }}</p>
+
+                @if(session('password_success'))
+                    <div class="profile-edit__flash profile-edit__flash--success" style="margin-bottom: 1.25rem;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+                        {{ session('password_success') }}
+                    </div>
+                @endif
+
+                @if($errors->has('current_password') || $errors->has('password'))
+                    <div class="profile-edit__flash profile-edit__flash--error" style="margin-bottom: 1.25rem;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126Z"/></svg>
+                        {{ __('Please correct the password errors below.') }}
+                    </div>
+                @endif
+
+                <div class="profile-edit__grid">
+                    <div class="profile-edit__field profile-edit__field--full">
+                        <label for="current_password" class="profile-edit__label">{{ __('Current Password') }} <span>*</span></label>
+                        <input type="password" name="current_password" id="current_password" required class="profile-edit__input" autocomplete="current-password">
+                        @error('current_password') <p class="profile-edit__error">{{ $message }}</p> @enderror
+                    </div>
+                    <div class="profile-edit__field">
+                        <label for="password" class="profile-edit__label">{{ __('New Password') }} <span>*</span></label>
+                        <input type="password" name="password" id="password" required class="profile-edit__input" autocomplete="new-password">
+                        @error('password') <p class="profile-edit__error">{{ $message }}</p> @enderror
+                    </div>
+                    <div class="profile-edit__field">
+                        <label for="password_confirmation" class="profile-edit__label">{{ __('Confirm New Password') }} <span>*</span></label>
+                        <input type="password" name="password_confirmation" id="password_confirmation" required class="profile-edit__input" autocomplete="new-password">
+                    </div>
+                </div>
+
+                <div class="profile-edit__password-hint">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/></svg>
+                    {{ __('Minimum 8 characters, must include letters and numbers. No spaces allowed.') }}
+                </div>
+
+                <div class="profile-edit__buttons">
+                    <button type="submit" class="profile-edit__submit">{{ __('Update Password') }}</button>
+                </div>
             </div>
         </form>
 

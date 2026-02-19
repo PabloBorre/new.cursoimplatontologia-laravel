@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Student;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rules\Password;
 
 class ProfileController extends Controller
 {
@@ -60,5 +62,23 @@ class ProfileController extends Controller
 
         return redirect()->route('student.profile.edit')
             ->with('success', __('Profile updated successfully.'));
+    }
+
+    /**
+     * Update the authenticated student's password.
+     */
+    public function updatePassword(Request $request)
+    {
+        $request->validate([
+            'current_password' => ['required', 'current_password'],
+            'password'         => ['required', 'confirmed', 'regex:/^\S+$/', Password::min(8)->letters()->numbers()],
+        ]);
+
+        $request->user()->update([
+            'password' => Hash::make($request->password),
+        ]);
+
+        return redirect()->route('student.profile.edit')
+            ->with('password_success', __('Password updated successfully.'));
     }
 }

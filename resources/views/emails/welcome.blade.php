@@ -21,11 +21,11 @@
                         </td>
                     </tr>
 
-                    <!-- Success banner -->
+                    <!-- Welcome banner -->
                     <tr>
                         <td style="background-color: #5497AF; padding: 24px 40px; text-align: center;">
                             <p style="margin: 0; font-size: 22px; font-weight: 700; color: #ffffff; letter-spacing: 0.5px;">
-                                ✓ Payment Confirmed
+                                Welcome to Implantex Academy!
                             </p>
                         </td>
                     </tr>
@@ -36,52 +36,37 @@
 
                             <!-- Greeting -->
                             <p style="margin: 0 0 20px; font-size: 16px; color: #042734; line-height: 1.6;">
-                                Hello <strong>{{ $enrollment->user->full_name }}</strong>,
+                                Hello <strong>{{ $user->full_name }}</strong>,
+                            </p>
+
+                            <p style="margin: 0 0 20px; font-size: 15px; color: #333; line-height: 1.6;">
+                                Thank you for registering at Implantex Academy. We're excited to have you join our community of dental professionals committed to excellence in implantology.
                             </p>
 
                             <p style="margin: 0 0 28px; font-size: 15px; color: #333; line-height: 1.6;">
-                                Thank you for your enrollment! Your payment has been successfully processed. Here are the details:
+                                Here's what you can do next:
                             </p>
 
-                            <!-- Details card -->
+                            <!-- Steps card -->
                             <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color: #E4F2F7; border-radius: 10px; margin-bottom: 28px;">
                                 <tr>
                                     <td style="padding: 24px 28px;">
                                         <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
                                             <tr>
-                                                <td style="padding: 6px 0; font-size: 13px; color: #5497AF; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; width: 130px; vertical-align: top;">
-                                                    Course
-                                                </td>
-                                                <td style="padding: 6px 0; font-size: 15px; color: #042734; font-weight: 600;">
-                                                    {{ $enrollment->course->title }}
+                                                <td style="padding: 8px 0; font-size: 15px; color: #042734; line-height: 1.6;">
+                                                    <strong style="color: #5497AF; font-size: 18px;">1.</strong>&nbsp;&nbsp;Verify your email address
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td style="padding: 6px 0; font-size: 13px; color: #5497AF; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; vertical-align: top;">
-                                                    Amount Paid
-                                                </td>
-                                                <td style="padding: 6px 0; font-size: 15px; color: #042734; font-weight: 600;">
-                                                    {{ number_format($enrollment->amount_paid, 2) }} {{ strtoupper($enrollment->currency) }}
+                                                <td style="padding: 8px 0; font-size: 15px; color: #042734; line-height: 1.6;">
+                                                    <strong style="color: #5497AF; font-size: 18px;">2.</strong>&nbsp;&nbsp;Complete your professional profile
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td style="padding: 6px 0; font-size: 13px; color: #5497AF; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; vertical-align: top;">
-                                                    Date
-                                                </td>
-                                                <td style="padding: 6px 0; font-size: 15px; color: #042734;">
-                                                    {{ $enrollment->enrolled_at->format('F d, Y') }}
+                                                <td style="padding: 8px 0; font-size: 15px; color: #042734; line-height: 1.6;">
+                                                    <strong style="color: #5497AF; font-size: 18px;">3.</strong>&nbsp;&nbsp;Browse our courses and enroll
                                                 </td>
                                             </tr>
-                                            @if($enrollment->stripe_payment_intent_id)
-                                            <tr>
-                                                <td style="padding: 6px 0; font-size: 13px; color: #5497AF; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; vertical-align: top;">
-                                                    Reference
-                                                </td>
-                                                <td style="padding: 6px 0; font-size: 13px; color: #999; font-family: monospace;">
-                                                    {{ $enrollment->stripe_payment_intent_id }}
-                                                </td>
-                                            </tr>
-                                            @endif
                                         </table>
                                     </td>
                                 </tr>
@@ -91,15 +76,15 @@
                             <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-bottom: 28px;">
                                 <tr>
                                     <td align="center">
-                                        <a href="{{ route('student.dashboard') }}" style="display: inline-block; background-color: #5497AF; color: #ffffff; text-decoration: none; font-size: 14px; font-weight: 700; padding: 14px 36px; border-radius: 50px; letter-spacing: 0.3px;">
-                                            Go to My Dashboard
+                                        <a href="{{ route('cursos') }}" style="display: inline-block; background-color: #5497AF; color: #ffffff; text-decoration: none; font-size: 14px; font-weight: 700; padding: 14px 36px; border-radius: 50px; letter-spacing: 0.3px;">
+                                            Explore Our Courses
                                         </a>
                                     </td>
                                 </tr>
                             </table>
 
                             <p style="margin: 0; font-size: 14px; color: #666; line-height: 1.6;">
-                                If you have any questions about your enrollment, don't hesitate to contact us at
+                                If you have any questions, don't hesitate to contact us at
                                 <a href="mailto:info@cursodeimplantologia.com" style="color: #5497AF; text-decoration: none; font-weight: 600;">info@cursodeimplantologia.com</a>
                                 or call us at <strong>786 328 78 05</strong>.
                             </p>

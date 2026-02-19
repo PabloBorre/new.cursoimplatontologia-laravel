@@ -40,7 +40,7 @@
             </a>
 
             @auth
-                <a href="{{ route('dashboard') }}" class="header-phone header-phone--desktop" style="gap: 0 !important">
+                <a href="{{ route('dashboard') }}" class="header-phone header-phone--desktop">
                     <flux:icon.user style="display: inline; width: 1em; height: 1em; vertical-align: middle; color:#5497af;" />
                     <span>{{ auth()->user()->name }}</span>
                 </a>

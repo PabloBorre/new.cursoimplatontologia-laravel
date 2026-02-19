@@ -66,6 +66,8 @@ Route::middleware(['auth', 'verified'])
             ->name('checkout.success');
         Route::get('/checkout/cancel', [CheckoutController::class, 'cancel'])
             ->name('checkout.cancel');
+        Route::put('/profile/password', [ProfileController::class, 'updatePassword'])
+            ->name('profile.password');
     });
 
 

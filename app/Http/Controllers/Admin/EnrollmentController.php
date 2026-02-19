@@ -21,6 +21,9 @@ class EnrollmentController extends Controller
             'enrollments as pending_enrollments_count' => function ($query) {
                 $query->where('status', 'pending');
             },
+            'enrollments as cancelled_enrollments_count' => function ($query) {
+                $query->where('status', 'cancelled');
+            },
         ])->orderBy('sort_order')->get();
 
         return view('admin.enrollments.index', compact('courses'));

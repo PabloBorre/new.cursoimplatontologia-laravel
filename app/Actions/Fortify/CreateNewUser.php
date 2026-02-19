@@ -3,8 +3,10 @@
 namespace App\Actions\Fortify;
 
 use App\Concerns\PasswordValidationRules;
+use App\Mail\WelcomeEmail;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
@@ -44,7 +46,7 @@ class CreateNewUser implements CreatesNewUsers
         $diplomaPath       = $input['diploma']->store('users/diplomas', 'public');
         $dentalLicensePath = $input['dental_license']->store('users/dental-licenses', 'public');
 
-        return User::create([
+        $user = User::create([
             'name'                => $input['name'],
             'last_name'           => $input['last_name'],
             'email'               => $input['email'],
@@ -62,5 +64,14 @@ class CreateNewUser implements CreatesNewUsers
             'dental_clinic_name'  => $input['dental_clinic_name'] ?? null,
             'position'            => $input['position'] ?? null,
         ]);
+
+        // Send welcome email
+        try {
+            Mail::to($user->email)->send(new WelcomeEmail($user));
+        } catch (\Exception $e) {
+            \Log::error("Failed to send welcome email to {$user->email}: " . $e->getMessage());
+        }
+
+        return $user;
     }
 }

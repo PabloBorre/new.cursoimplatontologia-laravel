@@ -46,7 +46,7 @@
                         {{-- Enrollment stats --}}
                         <div class="mt-4 flex items-center gap-4 border-t border-zinc-100 pt-4 dark:border-zinc-700">
                             <div class="flex items-center gap-1.5">
-                                <flux:icon.users variant="mini" class="size-4 text-blue-500" />
+                                <flux:icon.users variant="mini" class="size-4 text-green-500" />
                                 <span class="text-sm font-semibold text-zinc-900 dark:text-zinc-100">{{ $course->paid_enrollments_count }}</span>
                                 <span class="text-xs text-zinc-500 dark:text-zinc-400">{{ __('paid') }}</span>
                             </div>
@@ -55,6 +55,13 @@
                                     <flux:icon.clock variant="mini" class="size-4 text-amber-500" />
                                     <span class="text-sm font-semibold text-zinc-900 dark:text-zinc-100">{{ $course->pending_enrollments_count }}</span>
                                     <span class="text-xs text-zinc-500 dark:text-zinc-400">{{ __('pending') }}</span>
+                                </div>
+                            @endif
+                            @if($course->cancelled_enrollments_count > 0)
+                                <div class="flex items-center gap-1.5">
+                                    <flux:icon.x-circle variant="mini" class="size-4 text-red-500" />
+                                    <span class="text-sm font-semibold text-zinc-900 dark:text-zinc-100">{{ $course->cancelled_enrollments_count }}</span>
+                                    <span class="text-xs text-zinc-500 dark:text-zinc-400">{{ __('cancelled') }}</span>
                                 </div>
                             @endif
                         </div>
