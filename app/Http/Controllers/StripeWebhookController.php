@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\PaymentConfirmation;
 use App\Models\Enrollment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Stripe\Stripe;
 use Stripe\Webhook;
 
@@ -65,6 +67,9 @@ class StripeWebhookController extends Controller
             ]);
 
             Log::info("Stripe Webhook: Enrollment #{$enrollment->id} marked as paid");
+
+            // Send confirmation email
+            $this->sendConfirmationEmail($enrollment);
         }
     }
 
@@ -80,6 +85,24 @@ class StripeWebhookController extends Controller
         if ($enrollment) {
             $enrollment->update(['status' => 'cancelled']);
             Log::info("Stripe Webhook: Enrollment #{$enrollment->id} cancelled (session expired)");
+        }
+    }
+
+    /**
+     * Send payment confirmation email to the student.
+     */
+    private function sendConfirmationEmail(Enrollment $enrollment): void
+    {
+        try {
+            $enrollment->load(['user', 'course']);
+
+            Mail::to($enrollment->user->email)
+                ->send(new PaymentConfirmation($enrollment));
+
+            Log::info("Payment confirmation email sent for Enrollment #{$enrollment->id}");
+        } catch (\Exception $e) {
+            // Don't fail the webhook if email fails
+            Log::error("Failed to send payment confirmation email for Enrollment #{$enrollment->id}: " . $e->getMessage());
         }
     }
 }

@@ -22,7 +22,7 @@
             <!-- Auth dentro del nav (visible solo en mobile/tablet) -->
             @auth
                 <a href="{{ route('dashboard') }}" class="header-phone header-phone--nav">
-                    <img src="{{ asset('icon/usuario.svg') }}" alt="" class="phone-flag">
+                    <flux:icon.user style="display: inline; width: 1em; height: 1em; vertical-align: middle; color:#5497af;" />
                     <span>{{ auth()->user()->name }}</span>
                 </a>
             @else
@@ -41,12 +41,12 @@
 
             @auth
                 <a href="{{ route('dashboard') }}" class="header-phone header-phone--desktop" style="gap: 0 !important">
-                <img src="{{ asset('icon/usuario.svg') }}" alt="" class="phone-flag">
-                <span>{{ auth()->user()->name }}</span>
+                    <flux:icon.user style="display: inline; width: 1em; height: 1em; vertical-align: middle; color:#5497af;" />
+                    <span>{{ auth()->user()->name }}</span>
                 </a>
             @else
-                <a href="{{ route('login') }}" class="header-phone header-phone--desktop" style="gap: 0 !important">
-                    <img src="{{ asset('icon/usuario.svg') }}" alt="" class="phone-flag">
+                <a href="{{ route('login') }}" class="header-phone header-phone--desktop">
+                    <flux:icon.user style="display: inline; width: 1em; height: 1em; vertical-align: middle; color:#5497af;" />
                     <span>Log in</span>
                 </a>
             @endauth

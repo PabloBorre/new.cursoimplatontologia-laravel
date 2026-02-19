@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Student;
 
 use App\Http\Controllers\Controller;
+use App\Mail\PaymentConfirmation;
 use App\Models\Course;
 use App\Models\Enrollment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Stripe\Stripe;
 use Stripe\Checkout\Session as StripeSession;
 
@@ -29,13 +31,19 @@ class CheckoutController extends Controller
                 ->with('error', 'You are already enrolled in this course.');
         }
 
-        // Reuse existing pending enrollment or create new one
+        // Reuse any existing enrollment or create new one
         $enrollment = Enrollment::where('user_id', $user->id)
             ->where('course_id', $course->id)
-            ->where('status', 'pending')
             ->first();
 
-        if (!$enrollment) {
+        if ($enrollment) {
+            // Reset to pending for a new checkout attempt
+            $enrollment->update([
+                'status'     => 'pending',
+                'amount_paid' => $course->price,
+                'currency'   => strtolower($course->currency),
+            ]);
+        } else {
             $enrollment = Enrollment::create([
                 'user_id'    => $user->id,
                 'course_id'  => $course->id,
@@ -99,10 +107,12 @@ class CheckoutController extends Controller
                         'stripe_payment_intent_id'  => $session->payment_intent,
                         'enrolled_at'               => now(),
                     ]);
+
+                    // Send confirmation email
+                    $this->sendConfirmationEmail($enrollment);
                 }
             }
         } catch (\Exception $e) {
-            // Log error but don't crash — webhook will handle it
             \Log::error('Stripe session retrieve failed: ' . $e->getMessage());
         }
 
@@ -117,5 +127,21 @@ class CheckoutController extends Controller
     {
         return redirect()->route('student.dashboard')
             ->with('error', 'Payment was cancelled. You can try again anytime.');
+    }
+
+    /**
+     * Send payment confirmation email to the student.
+     */
+    private function sendConfirmationEmail(Enrollment $enrollment): void
+    {
+        try {
+            $enrollment->load(['user', 'course']);
+
+            Mail::to($enrollment->user->email)
+                ->send(new PaymentConfirmation($enrollment));
+
+        } catch (\Exception $e) {
+            \Log::error("Failed to send payment confirmation email for Enrollment #{$enrollment->id}: " . $e->getMessage());
+        }
     }
 }
