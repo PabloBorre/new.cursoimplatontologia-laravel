@@ -59,4 +59,21 @@ class HomeController extends Controller
 
         return view('testimonios.index', compact('testimonials'));
     }
+
+
+    public function legalNotice()
+    {
+        return view('legal.legal-notice');
+    }
+
+    public function cookiePolicy()
+    {
+        return view('legal.cookie-policy');
+    }
+
+    public function privacyPolicy()
+    {
+        return view('legal.privacy-policy');
+    }
 }
+

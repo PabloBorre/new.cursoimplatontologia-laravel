@@ -1,12 +1,16 @@
 @extends('layouts.public')
 
-@section('title', 'Testimonials - Implantex Academy')
+@section('title', 'Student Testimonials - What Our Graduates Say | Implantex Academy')
+@section('meta_description', 'Read what dental professionals say about Implantex Academy programs. Real testimonials from dentists who completed our hands-on dental implantology courses in Havana and Lima.')
+@section('og_title', 'Student Testimonials | Implantex Academy')
+@section('og_description', 'Real testimonials from dental professionals who completed Implantex Academy implantology training programs.')
+
 
 @section('content')
 <!-- HERO PÁGINA INTERIOR -->
 <section class="page-hero">
     <div class="page-hero__background">
-        <img src="{{ asset('images/operacion-imagen-contacto.webp') }}" alt="" class="page-hero__image">
+        <img src="{{ asset('images/operacion-imagen-contacto.webp') }}" alt="Implantex Academy student testimonials" class="page-hero__image">
         <div class="page-hero__overlay"></div>
         <img src="{{ asset('images/flecha-blanca.svg') }}" alt="" class="hero-arrow">
     </div>
@@ -25,7 +29,7 @@
                         <div class="testimonial-card__image-wrapper">
                             <img
                                 src="{{ asset($testimonial->image_path) }}"
-                                alt="Testimonio de {{ $testimonial->name }}"
+                                alt="Testimonial from {{ $testimonial->name }} - Implantex Academy graduate"
                                 class="testimonial-card__image"
                                 loading="lazy"
                             >

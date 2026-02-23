@@ -1,2 +1,10 @@
 User-agent: *
-Disallow:
+Allow: /
+Disallow: /admin/
+Disallow: /student/
+Disallow: /dashboard
+Disallow: /settings/
+Disallow: /stripe/
+Disallow: /checkout/
+
+Sitemap: https://www.cursodeimplantologia.com/sitemap.xml

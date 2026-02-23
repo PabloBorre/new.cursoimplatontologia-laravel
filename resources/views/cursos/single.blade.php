@@ -1,13 +1,62 @@
 @extends('layouts.public')
 
 @section('title', $course->title . ' - Implantex Academy')
-@section('meta_description', $course->meta_description ?? '')
+@section('meta_description', $course->meta_description ?? 'Enroll in ' . $course->title . ' at Implantex Academy. Hands-on dental implantology training with live patients, expert instructors, and accredited certification.')
+@section('og_title', $course->title . ' | Implantex Academy')
+@section('og_description', $course->meta_description ?? 'Enroll in ' . $course->title . '. Hands-on dental implantology training with live patients and accredited certification.')
+@section('og_type', 'product')
+
+@section('schema')
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Course",
+    "name": "{{ $course->title }}",
+    "description": "{{ $course->meta_description ?? $course->subtitle ?? 'Dental implantology training course at Implantex Academy' }}",
+    "provider": {
+        "@type": "EducationalOrganization",
+        "name": "Implantex Academy",
+        "url": "{{ url('/') }}"
+    },
+    "url": "{{ url()->current() }}",
+    "educationalLevel": "Professional",
+    "inLanguage": "en",
+    @if($course->price)
+    "offers": {
+        "@type": "Offer",
+        "price": "{{ $course->price }}",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "url": "{{ url()->current() }}"
+    },
+    @endif
+    "hasCourseInstance": [
+        @foreach($courseDates->flatten() as $date)
+        {
+            "@type": "CourseInstance",
+            "courseMode": "onsite",
+            "location": {
+                "@type": "Place",
+                "name": "{{ $date->location }}"
+            }
+            @if($date->start_date)
+            ,"startDate": "{{ $date->start_date->toDateString() }}"
+            @endif
+            @if($date->end_date)
+            ,"endDate": "{{ $date->end_date->toDateString() }}"
+            @endif
+        }@if(!$loop->last),@endif
+        @endforeach
+    ]
+}
+</script>
+@endsection
 
 @section('content')
 <!-- HERO PÁGINA INTERIOR -->
 <section class="page-hero">
     <div class="page-hero__background">
-        <img src="{{ asset($course->hero_image ?? 'images/operacion-fondo-nuestros-cursos.webp') }}" alt="" class="page-hero__image">
+        <img src="{{ asset($course->hero_image ?? 'images/operacion-fondo-nuestros-cursos.webp') }}" alt="{{ $course->title }} - Implantex Academy" class="page-hero__image">
         <div class="page-hero__overlay"></div>
         <img src="{{ asset('images/flecha-blanca.svg') }}" alt="" class="hero-arrow">
     </div>

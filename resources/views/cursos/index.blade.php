@@ -1,12 +1,17 @@
 @extends('layouts.public')
 
-@section('title', 'Our Courses - Implantex Academy')
+@section('title', 'Our Programs - Dental Implantology Courses | Implantex Academy')
+@section('meta_description', 'Browse Implantex Academy dental implantology programs from beginner to advanced. Hands-on training with live patients in Havana and Lima. Accredited certifications included.')
+@section('og_title', 'Dental Implantology Programs | Implantex Academy')
+@section('og_description', 'Dental implantology programs from beginner to advanced. Hands-on training with live patients and accredited certifications included.')
+
+
 
 @section('content')
 <!-- HERO PÁGINA INTERIOR -->
 <section class="page-hero">
     <div class="page-hero__background">
-        <img src="{{ asset('images/operacion-fondo-nuestros-cursos.webp') }}" alt="" class="page-hero__image">
+        <img src="{{ asset('images/operacion-fondo-nuestros-cursos.webp') }}" alt="Dental implantology programs at Implantex Academy" class="page-hero__image">
         <div class="page-hero__overlay"></div>
         <img src="{{ asset('images/flecha-blanca.svg') }}" alt="" class="hero-arrow">
     </div>

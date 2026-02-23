@@ -11,6 +11,8 @@ use App\Http\Controllers\Admin\EnrollmentController as AdminEnrollmentController
 use App\Http\Controllers\Student\DashboardController as StudentDashboardController;
 use App\Http\Controllers\Student\CheckoutController;
 use App\Http\Controllers\Student\ProfileController;
+use App\Http\Controllers\SitemapController;
+
 
 // ── Rutas públicas ──────────────────────────────────────────
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -20,6 +22,13 @@ Route::get('/cursos', [HomeController::class, 'cursos'])->name('cursos');
 Route::get('/cursos/{slug}', [HomeController::class, 'cursoDetalle']);
 Route::get('/docente/{slug}', [HomeController::class, 'docente']);
 Route::get('/testimonios', [HomeController::class, 'testimonios']);
+Route::get('/legal-notice', [HomeController::class, 'legalNotice']);
+Route::get('/cookie-policy', [HomeController::class, 'cookiePolicy']);
+Route::get('/privacy-policy', [HomeController::class, 'privacyPolicy']);
+
+
+// Sitemap
+Route::get('/sitemap.xml', [SitemapController::class, 'index']);
 
 Route::post('/contacto/enviar', [ContactController::class, 'enviar']);
 

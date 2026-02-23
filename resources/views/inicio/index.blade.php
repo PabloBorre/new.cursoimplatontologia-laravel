@@ -1,11 +1,57 @@
 @extends('layouts.public')
 
+@section('title', 'Implantex Academy - Dental Implant & Implantology Training Programs')
+@section('meta_description', 'Join Implantex Academy for hands-on dental implantology courses in Havana and Lima. Over 30 years training 5,000+ dentists worldwide. PACE & ADA CERP accredited programs with live patient practice.')
+@section('canonical', url('/'))
+@section('og_title', 'Implantex Academy - Dental Implant & Implantology Training Programs')
+@section('og_description', 'Hands-on dental implantology courses with live patient training. PACE & ADA CERP accredited programs in Havana and Lima. Over 30 years of experience.')
+
+@section('schema')
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "EducationalOrganization",
+    "name": "Implantex Academy",
+    "description": "Dental implantology courses and oral surgery training programs for dentists worldwide. Over 30 years of experience training professionals.",
+    "url": "{{ url('/') }}",
+    "logo": "{{ asset('images/logo-implantex-blanco.png') }}",
+    "telephone": "+1-786-382-7805",
+    "email": "info@cursodeimplantologia.com",
+    "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Miami",
+        "addressRegion": "FL",
+        "addressCountry": "US"
+    },
+    "hasCredential": [
+        {
+            "@type": "EducationalOccupationalCredential",
+            "credentialCategory": "Accreditation",
+            "recognizedBy": {
+                "@type": "Organization",
+                "name": "PACE - Academy of General Dentistry"
+            }
+        },
+        {
+            "@type": "EducationalOccupationalCredential",
+            "credentialCategory": "Accreditation",
+            "recognizedBy": {
+                "@type": "Organization",
+                "name": "ADA CERP"
+            }
+        }
+    ],
+    "sameAs": []
+}
+</script>
+@endsection
+
 @section('content')
 <main>
     <!-- HERO -->
     <section class="hero hero--video">
         <div class="hero-background">
-            <img src="{{ asset('images/hero-bg.webp') }}" alt="" class="hero-bg-image hero-bg-fallback">
+            <img src="{{ asset('images/hero-bg.webp') }}" alt="Dental implantology training session at Implantex Academy" class="hero-bg-image hero-bg-fallback">
             <div class="hero-video-container" id="hero-video-container">
                 <div id="hero-video-player"></div>
             </div>
@@ -99,7 +145,7 @@
                 <a href="{{ url('docentes') }}" class="team-btn">Meet your<br>future instructors</a>
             </div>
             <div class="team-image">
-                <img src="{{ asset('images/equipo-docente.webp') }}" alt="Equipo docente de Implantex Academy">
+                <img src="{{ asset('images/equipo-docente.webp') }}" alt="Implantex Academy teaching team during a training session">
             </div>
         </div>
     </section>
@@ -111,7 +157,7 @@
             <div class="courses-left">
                 <h2 class="courses-title">Implantology Programs
                 <div class="courses-image-1">
-                    <img src="{{ asset('images/curso-implantologia-1.webp') }}" alt="Curso de implantología">
+                    <img src="{{ asset('images/curso-implantologia-1.webp') }}" alt="Dental implantology course - hands-on surgical training">
                 </div>
                 <ul class="courses-list">
                     <li>
@@ -142,7 +188,7 @@
                     </p>
                 </div>
                 <div class="courses-image-2">
-                    <img src="{{ asset('images/curso-implantologia-2.webp') }}" alt="Práctica de implantología">
+                    <img src="{{ asset('images/curso-implantologia-2.webp') }}" alt="Students practicing dental implant placement">
                 </div>
                 <a href="{{ url('contacto') }}" class="courses-btn">More information</a>
             </div>
@@ -177,7 +223,7 @@
 
             <div class="contact-form-section__right">
                 <div class="contact-form-section__image-wrapper">
-                    <img src="{{ asset('images/lima-contacto.webp') }}" alt="Havana, Cuba" class="contact-form-section__image contacto-home">
+                    <img src="{{ asset('images/lima-contacto.webp') }}" alt="Lima, Peru - Implantex Academy course location" class="contact-form-section__image contacto-home">
                 </div>
                 <p class="contact-form-section__caption">
                     Interested in taking our implantology programs,<br>

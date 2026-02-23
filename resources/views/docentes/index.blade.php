@@ -1,13 +1,17 @@
 @extends('layouts.public')
 
-@section('title', 'Instructors - Implantex Academy')
+@section('title', 'Our Instructors - Expert Dental Implantology Faculty | Implantex Academy')
+@section('meta_description', 'Meet the Implantex Academy instructor team. Led by Dr. Juan Jesús Pérez García with over 45,000 implants placed. Decades of clinical and teaching experience in dental implantology worldwide.')
+@section('og_title', 'Meet Our Instructors | Implantex Academy')
+@section('og_description', 'Expert dental implantology instructors with decades of clinical and teaching experience. Led by Dr. Juan Jesús Pérez García.')
+
 
 @section('content')
 <main>
     <!-- HERO PÁGINA INTERIOR -->
     <section class="page-hero">
         <div class="page-hero__background">
-            <img src="{{ asset('images/operacion-imagen-docentes.webp') }}" alt="" class="page-hero__image">
+            <img src="{{ asset('images/operacion-imagen-docentes.webp') }}" alt="Implantex Academy instructors performing dental implant surgery" class="page-hero__image">
             <div class="page-hero__overlay"></div>
             <img src="{{ asset('images/flecha-blanca.svg') }}" alt="" class="hero-arrow">
         </div>
@@ -180,7 +184,7 @@
 
             <div class="contact-form-section__right">
                 <div class="contact-form-section__image-wrapper">
-                    <img src="{{ asset('images/habana-contacto.webp') }}" alt="Havana, Cuba" class="contact-form-section__image">
+                    <img src="{{ asset('images/habana-contacto.webp') }}" alt="Havana, Cuba - Implantex Academy training location" class="contact-form-section__image">
                 </div>
             </div>
         </div>

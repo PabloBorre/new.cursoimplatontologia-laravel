@@ -1,6 +1,33 @@
 @extends('layouts.public')
 
-@section('title', $doctor->full_name . ' - Implantex Academy')
+@section('title', $doctor->full_name . ' - Instructor | Implantex Academy')
+@section('meta_description', 'Learn about ' . $doctor->full_name . ($doctor->role_title ? ', ' . $doctor->role_title : '') . ' at Implantex Academy. Expert in dental implantology and oral surgery training.')
+@section('og_title', $doctor->full_name . ' | Implantex Academy Instructor')
+@section('og_description', 'Meet ' . $doctor->full_name . ', expert dental implantology instructor at Implantex Academy.')
+@section('og_type', 'profile')
+
+@section('schema')
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "{{ $doctor->full_name }}",
+    @if($doctor->role_title)
+    "jobTitle": "{{ $doctor->role_title }}",
+    @endif
+    "worksFor": {
+        "@type": "EducationalOrganization",
+        "name": "Implantex Academy",
+        "url": "{{ url('/') }}"
+    },
+    "url": "{{ url()->current() }}",
+    @if($doctor->image_path)
+    "image": "{{ asset($doctor->image_path) }}",
+    @endif
+    "knowsAbout": ["Dental Implantology", "Oral Surgery", "Dental Education"]
+}
+</script>
+@endsection
 
 @section('content')
 <!-- HERO PÁGINA INTERIOR -->
