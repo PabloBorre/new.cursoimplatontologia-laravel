@@ -46,6 +46,7 @@
 </script>
 @endsection
 
+
 @section('content')
 <main>
     <!-- HERO -->
@@ -155,7 +156,7 @@
         <div class="courses-bg"></div>
         <div class="courses-container">
             <div class="courses-left">
-                <h2 class="courses-title">Implantology Programs
+                <h2 class="courses-title">Implantology Programs</h2>
                 <div class="courses-image-1">
                     <img src="{{ asset('images/curso-implantologia-1.webp') }}" alt="Dental implantology course - hands-on surgical training">
                 </div>
