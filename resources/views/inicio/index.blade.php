@@ -176,8 +176,8 @@
             </div>
 
             <div class="contact-form-section__right">
-                <div class="contact-form-section__image-wrapper" style="height: 428px;">
-                    <img src="{{ asset('images/lima-contacto.webp') }}" alt="Havana, Cuba" class="contact-form-section__image" style="width: auto">
+                <div class="contact-form-section__image-wrapper">
+                    <img src="{{ asset('images/lima-contacto.webp') }}" alt="Havana, Cuba" class="contact-form-section__image contacto-home">
                 </div>
                 <p class="contact-form-section__caption">
                     Interested in taking our implantology programs,<br>

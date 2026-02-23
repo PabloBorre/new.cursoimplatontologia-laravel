@@ -42,7 +42,7 @@
         </div>
 
         <div class="contact-form-section__right">
-            <div class="contact-form-section__image-wrapper" style="height: 428px">
+            <div class="contact-form-section__image-wrapper contacto-contacto">
                 <img src="{{ asset('images/lima-contacto-contacto.webp') }}" alt="Lima" class="contact-form-section__image">
             </div>
             <p class="contact-form-section__caption">
