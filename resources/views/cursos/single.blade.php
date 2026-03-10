@@ -6,51 +6,61 @@
 @section('og_description', $course->meta_description ?? 'Enroll in ' . $course->title . '. Hands-on dental implantology training with live patients and accredited certification.')
 @section('og_type', 'product')
 
-@section('schema')
-<script type="application/ld+json">
-{
-    "@context": "https://schema.org",
-    "@type": "Course",
-    "name": "{{ $course->title }}",
-    "description": "{{ $course->meta_description ?? $course->subtitle ?? 'Dental implantology training course at Implantex Academy' }}",
-    "provider": {
-        "@type": "EducationalOrganization",
-        "name": "Implantex Academy",
-        "url": "{{ url('/') }}"
-    },
-    "url": "{{ url()->current() }}",
-    "educationalLevel": "Professional",
-    "inLanguage": "en",
-    @if($course->price)
-    "offers": {
-        "@type": "Offer",
-        "price": "{{ $course->price }}",
-        "priceCurrency": "USD",
-        "availability": "https://schema.org/InStock",
-        "url": "{{ url()->current() }}"
-    },
-    @endif
-    "hasCourseInstance": [
-        @foreach($courseDates->flatten() as $date)
-        {
-            "@type": "CourseInstance",
-            "courseMode": "onsite",
-            "location": {
-                "@type": "Place",
-                "name": "{{ $date->location }}"
-            }
-            @if($date->start_date)
-            ,"startDate": "{{ $date->start_date->toDateString() }}"
-            @endif
-            @if($date->end_date)
-            ,"endDate": "{{ $date->end_date->toDateString() }}"
-            @endif
-        }@if(!$loop->last),@endif
-        @endforeach
-    ]
+@php
+$schema = [
+  '@context' => 'https://schema.org',
+  '@type' => 'Course',
+  'name' => $course->title,
+  'description' => $course->meta_description
+    ?? $course->subtitle
+    ?? 'Dental implantology training course at Implantex Academy',
+  'provider' => [
+    '@type' => 'EducationalOrganization',
+    'name' => 'Implantex Academy',
+    'url' => url('/'),
+  ],
+  'url' => url()->current(),
+  'educationalLevel' => 'Professional',
+  'inLanguage' => 'en',
+];
+
+if (!empty($course->price)) {
+  $schema['offers'] = [
+    '@type' => 'Offer',
+    'price' => (string) $course->price,
+    'priceCurrency' => 'EUR',
+    'availability' => 'https://schema.org/InStock',
+    'url' => url()->current(),
+  ];
 }
-</script>
-@endsection
+
+$instances = [];
+foreach ($courseDates->flatten() as $date) {
+  $instance = [
+    '@type' => 'CourseInstance',
+    'courseMode' => 'onsite',
+    'location' => [
+      '@type' => 'Place',
+      'name' => (string) ($date->location ?? ''),
+    ],
+  ];
+
+  if (!empty($date->start_date)) {
+    $instance['startDate'] = $date->start_date->toDateString();
+  }
+  if (!empty($date->end_date)) {
+    $instance['endDate'] = $date->end_date->toDateString();
+  }
+
+  $instances[] = $instance;
+}
+
+$schema['hasCourseInstance'] = $instances;
+@endphp
+
+@push('schema')
+<script type="application/ld+json">{!! json_encode($schema, JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE) !!}</script>
+@endpush
 
 @section('content')
 <!-- HERO PÁGINA INTERIOR -->
@@ -168,7 +178,7 @@
         </div>
 
         <div class="course-dates__cta">
-            <a href="{{ url('contacto') }}" class="course-dates__btn">Reserve your spot</a>
+            <a href="{{ url('contact') }}" class="course-dates__btn">Reserve your spot</a>
         </div>
     </div>
 </section>
@@ -186,7 +196,7 @@
         <div class="auxiliary-course__content">
             <h2 class="auxiliary-course__title">{{ $auxiliaryCourse->title }}</h2>
             <p class="auxiliary-course__text">{{ $auxiliaryCourse->description }}</p>
-            <a href="{{ url('contacto') }}" class="auxiliary-course__btn">Any questions?</a>
+            <a href="{{ url('contact') }}" class="auxiliary-course__btn">Any questions?</a>
         </div>
     </div>
 </section>

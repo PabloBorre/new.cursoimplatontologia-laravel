@@ -32,7 +32,7 @@
                 <h1 class="docentes-main-title">
                     More than 30 years <span>teaching programs around the world</span>
                 </h1>
-                <a href="#docentes-lista" class="docentes-btn">Meet your<br>future instructors</a>
+                <a href="#docentes-team" class="docentes-btn">Meet your<br>future instructors</a>
             </div>
         </div>
     </section>
@@ -82,7 +82,7 @@
                 <p class="docentes-cursos-text">
                     Over these 30 years, Dr. Juan Jesús Pérez García has delivered<br> more than 200 Implantology programs, in addition to giving <br>numerous lectures around the world.
                 </p>
-                <a href="{{ url('contacto') }}" class="docentes-btn docentes-btn--cursos">Any question?</a>
+                <a href="{{ url('contact') }}" class="docentes-btn docentes-btn--cursos">Any question?</a>
             </div>
         </div>
     </section>
@@ -102,7 +102,7 @@
     </section>
 
     <!-- SECCIÓN EQUIPO DOCENTE - TARJETAS -->
-    <section class="docentes-team">
+    <section class="docentes-team" id="docentes-team">
         <div class="docentes-team__container">
             <div class="docentes-team__grid">
                 @forelse($doctors as $doctor)
@@ -114,7 +114,7 @@
                             <img src="{{ asset($doctor->image_path) }}" alt="{{ $doctor->full_name }}">
                         </div>
                         <h3 class="docente-card__name">{{ $doctor->full_name }}@if($doctor->role_title) | {{ $doctor->role_title }}@endif</h3>
-                        <a href="{{ url('docente/' . $doctor->slug) }}" class="docente-card__btn">More information</a>
+                        <a href="{{ url('instructor/' . $doctor->slug) }}" class="docente-card__btn">More information</a>
                     </div>
                 @empty
                     <p>No hay docentes disponibles.</p>
@@ -163,23 +163,7 @@
         <div class="contact-form-section__container">
             <div class="contact-form-section__left">
                 <h2 class="contact-form-section__title">Any questions?</h2>
-
-                <form action="{{ url('contacto/enviar') }}" method="POST" class="contact-form" id="contactForm">
-                    @csrf
-                    <div class="contact-form__group">
-                        <input type="text" name="nombre" id="nombre" class="contact-form__input" placeholder="Name" required>
-                    </div>
-                    <div class="contact-form__group">
-                        <input type="email" name="email" id="email" class="contact-form__input" placeholder="Email" required>
-                    </div>
-                    <div class="contact-form__group">
-                        <input type="tel" name="telefono" id="telefono" class="contact-form__input" placeholder="Phone">
-                    </div>
-                    <div class="contact-form__group">
-                        <textarea name="mensaje" id="mensaje" class="contact-form__textarea" placeholder="Message" rows="6" required></textarea>
-                    </div>
-                    <button type="submit" class="contact-form__submit">Send</button>
-                </form>
+                <livewire:contact-form />
             </div>
 
             <div class="contact-form-section__right">

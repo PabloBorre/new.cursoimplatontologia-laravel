@@ -30,28 +30,30 @@
     <meta name="robots" content="@yield('robots', 'index, follow')">
 
     {{-- SEO: Structured Data (JSON-LD) --}}
-    @hasSection('schema')
+    @if(View::hasSection('schema'))
         @yield('schema')
     @else
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "EducationalOrganization",
-        "name": "Implantex Academy",
-        "description": "Dental implantology courses and oral surgery training programs for dentists worldwide.",
-        "url": "{{ url('/') }}",
-        "logo": "{{ asset('images/logo-implantex-blanco.png') }}",
-        "telephone": "+1-786-382-7805",
-        "email": "info@cursodeimplantologia.com",
-        "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "Miami",
-            "addressRegion": "FL",
-            "addressCountry": "US"
-        },
-        "sameAs": []
-    }
-    </script>
+        @php
+        $defaultSchema = [
+        '@context' => 'https://schema.org',
+        '@type' => 'EducationalOrganization',
+        'name' => 'Implantex Academy',
+        'description' => 'Dental implantology courses and oral surgery training programs for dentists worldwide.',
+        'url' => url('/'),
+        'logo' => asset('images/logo-implantex-blanco.png'),
+        'telephone' => '+1-786-382-7805',
+        'email' => 'info@cursodeimplantologia.com',
+        'address' => [
+            '@type' => 'PostalAddress',
+            'addressLocality' => 'Miami',
+            'addressRegion' => 'FL',
+            'addressCountry' => 'US',
+        ],
+        'sameAs' => [],
+        ];
+        @endphp
+
+        <script type="application/ld+json">{!! json_encode($defaultSchema, JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE) !!}</script>
     @endif
 
     @stack('schema_extra')
@@ -73,7 +75,7 @@
     <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
 
     @stack('styles')
-    
+
     {{-- Google Analytics 4 --}}
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-J93B0GL4PF"></script>
     <script>

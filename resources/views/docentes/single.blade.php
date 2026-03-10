@@ -6,28 +6,32 @@
 @section('og_description', 'Meet ' . $doctor->full_name . ', expert dental implantology instructor at Implantex Academy.')
 @section('og_type', 'profile')
 
-@section('schema')
-<script type="application/ld+json">
-{
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "{{ $doctor->full_name }}",
-    @if($doctor->role_title)
-    "jobTitle": "{{ $doctor->role_title }}",
-    @endif
-    "worksFor": {
-        "@type": "EducationalOrganization",
-        "name": "Implantex Academy",
-        "url": "{{ url('/') }}"
-    },
-    "url": "{{ url()->current() }}",
-    @if($doctor->image_path)
-    "image": "{{ asset($doctor->image_path) }}",
-    @endif
-    "knowsAbout": ["Dental Implantology", "Oral Surgery", "Dental Education"]
+@php
+$schema = [
+  '@context' => 'https://schema.org',
+  '@type' => 'Person',
+  'name' => $doctor->full_name,
+  'worksFor' => [
+    '@type' => 'EducationalOrganization',
+    'name' => 'Implantex Academy',
+    'url' => url('/'),
+  ],
+  'url' => url()->current(),
+  'knowsAbout' => ['Dental Implantology', 'Oral Surgery', 'Dental Education'],
+];
+
+if (!empty($doctor->role_title)) {
+  $schema['jobTitle'] = $doctor->role_title;
 }
-</script>
-@endsection
+
+if (!empty($doctor->image_path)) {
+  $schema['image'] = asset($doctor->image_path);
+}
+@endphp
+
+@push('schema')
+<script type="application/ld+json">{!! json_encode($schema, JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE) !!}</script>
+@endpush
 
 @section('content')
 <!-- HERO PÁGINA INTERIOR -->
@@ -103,7 +107,7 @@
 <section class="doctor-back">
     <div class="doctor-back__container">
         <div class="doctor-back__content">
-            <a href="{{ url('docentes') }}" class="doctor-back__btn">← Back to teachers</a>
+            <a href="{{ url('instructors') }}" class="doctor-back__btn">← Back to teachers</a>
         </div>
     </div>
 </section>

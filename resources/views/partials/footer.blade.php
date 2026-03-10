@@ -13,7 +13,7 @@
                 <div class="footer-contact">
                     <a href="tel:+17863827805" class="footer-phone">786 382 78 05</a>
                     <p class="footer-location">Miami, FL</p>
-                    <a href="mailto:info@cursodeimplantologia.com" class="footer-email">info@cursodeimplantologia.com</a>
+                    <a href="mailto:info@implantexacademy.com" class="footer-email">info@implantexacademy.com</a>
                 </div>
 
                 <!-- Navegación debajo del contacto -->
@@ -21,9 +21,9 @@
                     <nav class="footer-nav footer-nav--main">
                         <ul>
                             <li><a href="{{ url('/') }}">Home</a></li>
-                            <li><a href="{{ url('docentes') }}">Instructors</a></li>
-                            <li><a href="{{ url('cursos') }}">Programs</a></li>
-                            <li><a href="{{ url('testimonios') }}">Testimonials</a></li>
+                            <li><a href="{{ url('instructors') }}">Instructors</a></li>
+                            <li><a href="{{ url('courses') }}">Programs</a></li>
+                            <li><a href="{{ url('testimonials') }}">Testimonials</a></li>
                         </ul>
                     </nav>
 
@@ -59,7 +59,7 @@
     50% { transform: scale(1.15); }
 }
 </style>
-<a id="whatsapp-float" href="https://api.whatsapp.com/send?phone=1(786)3287805&text=" target="_blank" style="position:fixed;right:20px;bottom:20px;z-index:100000;display:flex;align-items:center;justify-content:center;animation:pulse 1.5s ease-in-out infinite;">
+<a id="whatsapp-float" href="https://api.whatsapp.com/send?phone=17863287805&text=" target="_blank" style="position:fixed;right:20px;bottom:20px;z-index:100000;display:flex;align-items:center;justify-content:center;animation:pulse 1.5s ease-in-out infinite;">
     <img src="{{ asset('icon/whatsapp.svg') }}" style="width:65px" alt="WhatsApp">
 </a>
 

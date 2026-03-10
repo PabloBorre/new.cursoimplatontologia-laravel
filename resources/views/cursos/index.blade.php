@@ -57,7 +57,7 @@
                     <span class="course-card__level">Level {{ $course->level }}</span>
                     <h2 class="course-card__title">{!! $formattedTitle !!}</h2>
                     <p class="course-card__subtitle">{{ $course->subtitle ?? 'Course' }}</p>
-                    <a href="{{ url('cursos/' . $course->slug) }}" class="course-card__btn">More information</a>
+                    <a href="{{ url('courses/' . $course->slug) }}" class="course-card__btn">More information</a>
                 </div>
             </div>
         </article>
@@ -73,7 +73,7 @@
                     <span class="course-card__level">Level {{ $course->level }}</span>
                     <h2 class="course-card__title">{!! $formattedTitle !!}</h2>
                     <p class="course-card__subtitle">{{ $course->subtitle ?? 'Course' }}</p>
-                    <a href="{{ url('cursos/' . $course->slug) }}" class="course-card__btn">More information</a>
+                    <a href="{{ url('courses/' . $course->slug) }}" class="course-card__btn">More information</a>
                 </div>
                 <div class="course-card__image-side">
                     <div class="course-card__arrows" style="z-index: 2;">

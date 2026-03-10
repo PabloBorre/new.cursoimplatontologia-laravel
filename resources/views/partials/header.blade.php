@@ -9,10 +9,10 @@
         <nav class="header-nav" id="headerNav">
             <ul>
                 <li><a href="{{ url('/') }}">Home</a></li>
-                <li><a href="{{ url('docentes') }}">Instructors</a></li>
-                <li><a href="{{ url('cursos') }}">Programs</a></li>
-                <li><a href="{{ url('testimonios') }}">Testimonials</a></li>
-                <li><a href="{{ url('contacto') }}">Contact</a></li>
+                <li><a href="{{ url('instructors') }}">Instructors</a></li>
+                <li><a href="{{ url('courses') }}">Programs</a></li>
+                <li><a href="{{ url('testimonials') }}">Testimonials</a></li>
+                <li><a href="{{ url('contact') }}">Contact</a></li>
             </ul>
             <!-- Teléfono dentro del nav (visible solo en mobile/tablet) -->
             <a href="tel:+17863287805" class="header-phone header-phone--nav">

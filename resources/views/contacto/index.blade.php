@@ -5,29 +5,31 @@
 @section('og_title', 'Contact Implantex Academy')
 @section('og_description', 'Get in touch with Implantex Academy. Call 786 382 78 05 or email info@cursodeimplantologia.com for course information.')
 
-@section('schema')
-<script type="application/ld+json">
-{
-    "@context": "https://schema.org",
-    "@type": "ContactPage",
-    "name": "Contact Implantex Academy",
-    "description": "Get in touch with Implantex Academy for dental implantology course information.",
-    "url": "{{ url()->current() }}",
-    "mainEntity": {
-        "@type": "EducationalOrganization",
-        "name": "Implantex Academy",
-        "telephone": "+1-786-382-7805",
-        "email": "info@cursodeimplantologia.com",
-        "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "Miami",
-            "addressRegion": "FL",
-            "addressCountry": "US"
-        }
-    }
-}
-</script>
-@endsection
+@php
+$schema = [
+  '@context' => 'https://schema.org',
+  '@type' => 'ContactPage',
+  'name' => 'Contact Implantex Academy',
+  'description' => 'Get in touch with Implantex Academy for dental implantology course information.',
+  'url' => url()->current(),
+  'mainEntity' => [
+    '@type' => 'EducationalOrganization',
+    'name' => 'Implantex Academy',
+    'telephone' => '+1-786-382-7805',
+    'email' => 'info@cursodeimplantologia.com',
+    'address' => [
+      '@type' => 'PostalAddress',
+      'addressLocality' => 'Miami',
+      'addressRegion' => 'FL',
+      'addressCountry' => 'US',
+    ],
+  ],
+];
+@endphp
+
+@push('schema')
+<script type="application/ld+json">{!! json_encode($schema, JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE) !!}</script>
+@endpush
 
 @section('content')
 <!-- HERO PÁGINA INTERIOR -->
@@ -49,9 +51,9 @@
             <img src="{{ asset('images/flecha-azulclaro-rellena.svg') }}" alt="" class="contact-bar__arrow">
             <span>786 382 78 05</span>
         </a>
-        <a href="mailto:info@cursodeimplantologia.com" class="contact-bar__item">
+        <a href="mailto:info@implantexacademy.com" class="contact-bar__item">
             <img src="{{ asset('images/flecha-azulclaro-rellena.svg') }}" alt="" class="contact-bar__arrow">
-            <span>info@cursodeimplantologia.com</span>
+            <span>info@implantexacademy.com</span>
         </a>
         <div class="contact-bar__item">
             <img src="{{ asset('images/flecha-azulclaro-rellena.svg') }}" alt="" class="contact-bar__arrow">

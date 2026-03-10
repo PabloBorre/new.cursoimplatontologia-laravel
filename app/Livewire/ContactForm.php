@@ -28,7 +28,7 @@ class ContactForm extends Component
     {
         $data = $this->validate();
 
-        Mail::to('info@cursodeimplantologia.com')->send(new ContactMail($data));
+        Mail::to('info@implantexacademy.com')->send(new ContactMail($data));
 
         $this->reset(['nombre', 'email', 'telefono', 'mensaje']);
         $this->sent = true;

@@ -14,29 +14,27 @@ use App\Http\Controllers\Student\ProfileController;
 use App\Http\Controllers\SitemapController;
 
 
-// ── Rutas públicas ──────────────────────────────────────────
+// ── Public Routes ──────────────────────────────────────────
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/contacto', [HomeController::class, 'contacto']);
-Route::get('/docentes', [HomeController::class, 'docentes']);
-Route::get('/cursos', [HomeController::class, 'cursos'])->name('cursos');
-Route::get('/cursos/{slug}', [HomeController::class, 'cursoDetalle']);
-Route::get('/docente/{slug}', [HomeController::class, 'docente']);
-Route::get('/testimonios', [HomeController::class, 'testimonios']);
+Route::get('/contact', [HomeController::class, 'contacto']);
+Route::get('/instructors', [HomeController::class, 'docentes']);
+Route::get('/courses', [HomeController::class, 'cursos'])->name('cursos');
+Route::get('/courses/{slug}', [HomeController::class, 'cursoDetalle']);
+Route::get('/instructor/{slug}', [HomeController::class, 'docente'])->name('docente');
+Route::get('/testimonials', [HomeController::class, 'testimonios']);
 Route::get('/legal-notice', [HomeController::class, 'legalNotice']);
 Route::get('/cookie-policy', [HomeController::class, 'cookiePolicy']);
 Route::get('/privacy-policy', [HomeController::class, 'privacyPolicy']);
 
-
 // Sitemap
 Route::get('/sitemap.xml', [SitemapController::class, 'index']);
 
-Route::post('/contacto/enviar', [ContactController::class, 'enviar']);
+Route::post('/contact/send', [ContactController::class, 'enviar']);
 
 Route::prefix('api')->group(function () {
     Route::get('calendar/events', [CalendarController::class, 'getEvents']);
     Route::get('calendar/locations', [CalendarController::class, 'getLocations']);
 });
-
 
 // ── Stripe Webhook (sin CSRF) ───────────────────────────────
 Route::post('/stripe/webhook', [StripeWebhookController::class, 'handle'])

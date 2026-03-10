@@ -81,7 +81,7 @@
         <div class="cta-destacar__content">
             <h2 class="cta-destacar__title">Do you want to stand out in the field of implantology?</h2>
             <p class="cta-destacar__text">Join our trainees and gain the skills and knowledge you need to excel in this specialty.</p>
-            <a href="{{ url('contacto') }}" class="cta-destacar__btn">Request information</a>
+            <a href="{{ url('contact') }}" class="cta-destacar__btn">Request information</a>
         </div>
     </div>
 </section>
