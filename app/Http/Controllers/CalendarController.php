@@ -20,7 +20,7 @@ class CalendarController extends Controller
 
             return [
                 'id'            => $date->id,
-                'title'         => $date->course->title,
+                'title'         => strip_tags($date->course->title),
                 'start'         => $date->start_date->toDateString(),
                 'end'           => $date->end_date->addDay()->toDateString(),
                 'url'           => url('cursos/' . $date->course->slug),

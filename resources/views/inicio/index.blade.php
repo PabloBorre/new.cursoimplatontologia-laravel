@@ -56,7 +56,7 @@ $schema = [
             <img src="{{ asset('images/flecha-blanca.svg') }}" alt="" class="hero-arrow">
         </div>
         <div class="hero-content">
-            <h1><span>Dental Implant</span> <br>Programs &<br><span>Implantology</span> Programs</h1>
+            <h1>Hands-On Implant <span>and</span> Surgery Programs <span>with</span> Live Patients</h1>
             <div class="hero-logos">
                 <img src="{{ asset('images/logo-pace.png') }}" alt="PACE - Academy of General Dentistry">
                 <img src="{{ asset('images/logo-adi.png') }}" alt="ADI - Association of Dental Implantology">

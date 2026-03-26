@@ -4,6 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-MD7LZ2D');</script>
+    <!-- End Google Tag Manager -->
+    <script src="https://analytics.ahrefs.com/analytics.js" data-key="Kk6M5EQI1EeRcSu4Ge12Zw" async></script>
+
+
+
     {{-- SEO: Title & Description --}}
     <title>@yield('title', 'Implantex Academy - Dental Implantology Courses & Training Programs')</title>
     <meta name="description" content="@yield('meta_description', 'Dental implantology courses and oral surgery training for dentists. Over 30 years of experience training professionals worldwide. Hands-on programs in Havana & Lima.')">
@@ -76,16 +88,23 @@
 
     @stack('styles')
 
-    {{-- Google Analytics 4 --}}
+    {{-- Google Analytics 4 + Google Ads --}}
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-J93B0GL4PF"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
         gtag('config', 'G-J93B0GL4PF');
+        gtag('config', 'AW-16475784567');
     </script>
 </head>
 <body>
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MD7LZ2D"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
 
     @include('partials.header')
 
@@ -95,5 +114,22 @@
 
     @stack('scripts')
 
+
+        {{-- Google Ads: conversion tracking --}}
+    <script>
+    function gtag_report_conversion(url) {
+        var callback = function () {
+            if (typeof(url) != 'undefined') {
+                window.location = url;
+            }
+        };
+        gtag('event', 'conversion', {
+            'send_to': 'AW-16475784567/0j03CMf02u4aEPeKorA9',
+            'event_callback': callback
+        });
+        return false;
+    }
+    </script>
+    
 </body>
 </html>

@@ -71,7 +71,7 @@ $schema['hasCourseInstance'] = $instances;
         <img src="{{ asset('images/flecha-blanca.svg') }}" alt="" class="hero-arrow">
     </div>
     <div class="page-hero__content">
-        <h1 class="page-hero__title">{{ $course->title }}</h1>
+        <h1 class="page-hero__title">{!! $course->title !!}</h1>    
     </div>
 </section>
 

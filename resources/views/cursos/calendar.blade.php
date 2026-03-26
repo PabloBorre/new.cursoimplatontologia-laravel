@@ -267,6 +267,7 @@ document.addEventListener('DOMContentLoaded', function() {
             return activeFilters.has(getLocationKey(loc));
         });
         calendar.addEventSource(filtered);
+        setTimeout(fixEventWidths, 100); // ← añade esto
     }
 
     legendButtons.forEach(btn => {
@@ -274,16 +275,15 @@ document.addEventListener('DOMContentLoaded', function() {
             const filter = this.dataset.filter;
 
             if (filter === 'all') {
-                if (activeFilters.size === 2) {
-                    activeFilters.clear();
-                } else {
-                    activeFilters = new Set(['peru', 'cuba']);
-                }
+                // "All" siempre activa todos
+                activeFilters = new Set(['peru', 'cuba']);
             } else {
-                if (activeFilters.has(filter)) {
-                    activeFilters.delete(filter);
+                // Si ya estamos viendo solo ese país → volver a mostrar todos
+                if (activeFilters.size === 1 && activeFilters.has(filter)) {
+                    activeFilters = new Set(['peru', 'cuba']);
                 } else {
-                    activeFilters.add(filter);
+                    // Mostrar solo ese país
+                    activeFilters = new Set([filter]);
                 }
             }
 
@@ -304,17 +304,33 @@ document.addEventListener('DOMContentLoaded', function() {
     fetch('/api/calendar/events')
         .then(res => res.json())
         .then(data => {
-            allEvents = data.map(ev => {
-                // Mover url a extendedProps y eliminarla del evento
-                if (ev.url) {
-                    if (!ev.extendedProps) ev.extendedProps = {};
-                    ev.extendedProps.courseUrl = ev.url;
-                    delete ev.url;
+        allEvents = data.map(ev => {
+            if (ev.url) {
+                if (!ev.extendedProps) ev.extendedProps = {};
+                ev.extendedProps.courseUrl = ev.url;
+                delete ev.url;
+            }
+
+            // Fix: mover el end al lunes siguiente para que FullCalendar
+            // multiMonth renderice correctamente la barra L-V
+            if (ev.end) {
+                const endDate = new Date(ev.end + 'T00:00:00');
+                // Si end es sábado (6), moverlo al lunes siguiente (+2)
+                if (endDate.getDay() === 6) {
+                    endDate.setDate(endDate.getDate() + 3);
+                    ev.end = endDate.toISOString().split('T')[0];
                 }
-                return ev;
-            });
-            calendar.addEventSource(allEvents);
-        })
+                // Si end es domingo (0), moverlo al lunes siguiente (+1)
+                else if (endDate.getDay() === 0) {
+                    endDate.setDate(endDate.getDate() + 1);
+                    ev.end = endDate.toISOString().split('T')[0];
+                }
+            }
+
+            return ev;
+        });
+        calendar.addEventSource(allEvents);
+    })
         .catch(err => console.error('Error loading calendar events', err));
 
         const now = new Date();
@@ -375,6 +391,22 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     calendar.render();
+
+    function fixEventWidths() {
+        const cell = document.querySelector('.fc-multimonth .fc-daygrid-day');
+        if (!cell) return;
+        const cellWidth = cell.offsetWidth;
+        const correction = -(cellWidth * 4); // 2 columnas (S y D)
+        
+        document.querySelectorAll('.fc-daygrid-event-harness-abs').forEach(el => {
+            el.style.setProperty('right', correction + 'px', 'important');
+        });
+    }
+
+setTimeout(fixEventWidths, 300);
+
+// También al redimensionar
+window.addEventListener('resize', () => setTimeout(fixEventWidths, 300));
 
     if (window.innerWidth < 768) {
         calendar.setOption('multiMonthMaxColumns', 1);

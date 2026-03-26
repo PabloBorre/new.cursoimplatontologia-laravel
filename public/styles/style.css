@@ -5847,7 +5847,7 @@ a.contact-bar__item:hover {
     transform: translate(-50%, -50%) rotate(270deg);
     width: auto;
     height: 105%;
-    opacity: 0.3;
+    opacity: 0.15;
     z-index: 3;
     pointer-events: none;
 }
@@ -6586,4 +6586,8 @@ a.contact-bar__item:hover {
         font-size: 0.9rem;
         line-height: 1.7;
     }
+}
+
+.page-hero__title strong {
+    color: #5497af;
 }

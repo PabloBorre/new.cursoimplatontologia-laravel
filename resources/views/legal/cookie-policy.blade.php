@@ -108,8 +108,8 @@
                 If you have any questions about our use of cookies, please contact us at:
             </p>
             <ul class="legal-page__list">
-                <li><strong>Email:</strong> <a href="mailto:info@cursodeimplantologia.com">info@cursodeimplantologia.com</a></li>
-                <li><strong>Phone:</strong> <a href="tel:+17863827805">786 382 78 05</a></li>
+                <li><strong>Email:</strong> <a href="mailto:info@implantexacademy.com">info@implantexacademy.com</a></li>
+                <li><strong>Phone:</strong> <a href="tel:+17863287805">+1 786 328 78 05</a></li>
             </ul>
 
         </div>

@@ -15,9 +15,9 @@
                 <li><a href="{{ url('contact') }}">Contact</a></li>
             </ul>
             <!-- Teléfono dentro del nav (visible solo en mobile/tablet) -->
-            <a href="tel:+17863287805" class="header-phone header-phone--nav">
+            <a href="tel:+17863287805" class="header-phone header-phone--nav" onclick="return gtag_report_conversion('tel:+17863287805')">
                 <img src="{{ asset('icon/bandera-eeuu.svg') }}" alt="US" class="phone-flag">
-                <span>786 328 78 05</span>
+                <span>+1 786 328 78 05</span>
             </a>
             <!-- Auth dentro del nav (visible solo en mobile/tablet) -->
             @auth
@@ -34,9 +34,9 @@
 
         <!-- Botones desktop -->
         <div class="header-actions">
-            <a href="tel:+17863287805" class="header-phone header-phone--desktop">
+            <a href="tel:+17863287805" class="header-phone header-phone--desktop" onclick="return gtag_report_conversion('tel:+17863287805')">
                 <img src="{{ asset('icon/bandera-eeuu.svg') }}" alt="US" class="phone-flag">
-                <span>786 328 78 05</span>
+                <span>+1 786 328 78 05</span>
             </a>
 
             @auth

@@ -3,34 +3,57 @@
 namespace App\Livewire;
 
 use App\Mail\ContactMail;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 
 class ContactForm extends Component
 {
-    public string $nombre = '';
-    public string $email = '';
+    public string $nombre   = '';
+    public string $email    = '';
     public string $telefono = '';
-    public string $mensaje = '';
-    public bool $sent = false;
+    public string $mensaje  = '';
+    public string $recaptchaToken = ''; // ← nuevo
+    public bool   $sent     = false;
 
     protected function rules(): array
     {
         return [
-            'nombre'   => 'required|min:3|max:120',
-            'email'    => 'required|email',
-            'telefono' => 'nullable|max:30',
-            'mensaje'  => 'required|min:10|max:2000',
+            'nombre'          => 'required|min:3|max:120',
+            'email'           => 'required|email',
+            'telefono'        => 'nullable|max:30',
+            'mensaje'         => 'required|min:10|max:2000',
+            'recaptchaToken'  => 'required', // ← nuevo
         ];
     }
 
     public function enviar()
     {
-        $data = $this->validate();
+        $this->validate();
 
-        Mail::to('info@implantexacademy.com')->send(new ContactMail($data));
+        // Verificar token con Google
+        $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
+            'secret'   => config('services.recaptcha.secret_key'),
+            'response' => $this->recaptchaToken,
+        ]);
 
-        $this->reset(['nombre', 'email', 'telefono', 'mensaje']);
+        $score = $response->json('score', 0);
+
+        if (! $response->json('success') || $score < 0.5) {
+            $this->addError('recaptchaToken', 'Security check failed. Please try again.');
+            return;
+        }
+
+        $data = [
+            'nombre'   => $this->nombre,
+            'email'    => $this->email,
+            'telefono' => $this->telefono,
+            'mensaje'  => $this->mensaje,
+        ];
+
+        Mail::to('info@cursodeimplantologia.com')->send(new ContactMail($data));
+
+        $this->reset(['nombre', 'email', 'telefono', 'mensaje', 'recaptchaToken']);
         $this->sent = true;
     }
 

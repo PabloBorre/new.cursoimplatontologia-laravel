@@ -47,7 +47,7 @@
             </div>
             <div class="docentes-row__col docentes-row__col--right">
                 <p class="docentes-doctor-text">
-                    <strong>Dr. Juan Jesús Pérez García</strong>, director and instructor at our institute, was trained by the "father of modern dental implantology," Prof. Brånemark, in Sweden. Since then, <strong>he has placed more than 45,000 implants</strong> in a wide range of cases, making him <strong>an expert in his field</strong> and an outstanding communicator. Learning from him is a unique opportunity to begin your own path to success.
+                    <strong>Dr. Juan Jesús Pérez García</strong>, director and instructor at our institute, was trained by the "father of modern dental implantology," Prof. Brånemark, in Sweden. Since then, <strong>he has placed more than 45,000 implants</strong> in a wide range of cases, making him <strong>an expert in his field</strong> and an outstanding communicator.<strong> He also leads the longest-running course in the world. </strong>Learning from him is a unique opportunity to begin your own path to success.
                 </p>
             </div>
         </div>

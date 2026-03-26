@@ -11,7 +11,7 @@
             <div class="footer-left">
                 <!-- Contacto -->
                 <div class="footer-contact">
-                    <a href="tel:+17863827805" class="footer-phone">786 382 78 05</a>
+                    <a href="tel:+17863287805" class="footer-phone" onclick="return gtag_report_conversion('tel:+17863287805')">+1 786 328 78 05</a>
                     <p class="footer-location">Miami, FL</p>
                     <a href="mailto:info@implantexacademy.com" class="footer-email">info@implantexacademy.com</a>
                 </div>
@@ -53,15 +53,66 @@
 </footer>
 
 <!-- WhatsApp Float -->
+<!-- WhatsApp Float -->
 <style>
-@keyframes pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.15); }
+.whatsapp-float {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 100000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.whatsapp-float__bubble {
+    position: absolute;
+    right: 75px;
+    background-color: #042734;
+    color: #fff;
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-family: var(--font-secondary, sans-serif);
+    font-size: 0.85rem;
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateX(8px);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    pointer-events: none;
+}
+
+.whatsapp-float__bubble::after {
+    content: '';
+    position: absolute;
+    right: -7px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 5px solid transparent;
+    border-left-color: #042734;
+}
+
+.whatsapp-float:hover .whatsapp-float__bubble {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.whatsapp-float img {
+    width: 65px;
+    transition: transform 0.2s ease;
+}
+
+.whatsapp-float:hover img {
+    transform: scale(1.08);
 }
 </style>
-<a id="whatsapp-float" href="https://api.whatsapp.com/send?phone=17863287805&text=" target="_blank" style="position:fixed;right:20px;bottom:20px;z-index:100000;display:flex;align-items:center;justify-content:center;animation:pulse 1.5s ease-in-out infinite;">
-    <img src="{{ asset('icon/whatsapp.svg') }}" style="width:65px" alt="WhatsApp">
+
+<a class="whatsapp-float" href="https://api.whatsapp.com/send?phone=17863287805&text=" target="_blank">
+    <span class="whatsapp-float__bubble">Let's chat</span>
+    <img src="{{ asset('icon/whatsapp.svg') }}" alt="WhatsApp">
 </a>
+
+
 
 
 <!-- Swiper JS -->

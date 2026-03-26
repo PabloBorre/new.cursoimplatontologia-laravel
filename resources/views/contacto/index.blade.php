@@ -15,7 +15,7 @@ $schema = [
   'mainEntity' => [
     '@type' => 'EducationalOrganization',
     'name' => 'Implantex Academy',
-    'telephone' => '+1-786-382-7805',
+    'telephone' => '+1-786-328-7805',
     'email' => 'info@cursodeimplantologia.com',
     'address' => [
       '@type' => 'PostalAddress',
@@ -47,9 +47,9 @@ $schema = [
 <!-- BARRA DE CONTACTO -->
 <section class="contact-bar">
     <div class="contact-bar__container">
-        <a href="tel:+347863827805" class="contact-bar__item">
+        <a href="tel:+17863287805" class="contact-bar__item">
             <img src="{{ asset('images/flecha-azulclaro-rellena.svg') }}" alt="" class="contact-bar__arrow">
-            <span>786 382 78 05</span>
+            <span>+1 786 328 78 05</span>
         </a>
         <a href="mailto:info@implantexacademy.com" class="contact-bar__item">
             <img src="{{ asset('images/flecha-azulclaro-rellena.svg') }}" alt="" class="contact-bar__arrow">
